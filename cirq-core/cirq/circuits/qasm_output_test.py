@@ -130,6 +130,18 @@ qreg q[1];
 """
 
 
+def test_qubit_name_with_newline_stays_in_comment() -> None:
+    q = cirq.NamedQubit('a\nx q[0];')
+    output = cirq.QasmOutput((), (q,))
+    assert str(output) == """OPENQASM 2.0;
+include "qelib1.inc";
+
+
+// Qubits: [a x q[0];]
+qreg q[1];
+"""
+
+
 def test_empty_circuit_no_qubits() -> None:
     output = cirq.QasmOutput((), ())
     assert str(output) == """OPENQASM 2.0;

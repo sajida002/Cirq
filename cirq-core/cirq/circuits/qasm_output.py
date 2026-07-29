@@ -338,7 +338,8 @@ class QasmOutput:
         # Register definitions
         # Qubit registers
 
-        output(f"// Qubits: [{', '.join(map(str, self.qubits))}]\n")
+        qubit_names = ', '.join(' '.join(str(q).split('\n')) for q in self.qubits)
+        output(f"// Qubits: [{qubit_names}]\n")
         if len(self.qubits) > 0:
             if self.args.version == '2.0':
                 output(f'qreg q[{len(self.qubits)}];\n')
